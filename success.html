@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Payment status | Explicit Online Tutorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body class="rp">
+  <header class="rp-top"><div class="w"><a class="logo" href="index.html"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark"><span>Explicit Online Tutorial</span></a></div></header>
+
+  <main class="rp-main">
+    <!-- checking -->
+    <section class="rc" id="sWait" aria-live="polite">
+      <div class="ico wait"><div class="ring"></div></div>
+      <h1>Confirming your payment…</h1>
+      <p class="l">Please don't close this page. This only takes a few seconds.</p>
+    </section>
+
+    <!-- success -->
+    <section class="rc" id="sOk" hidden>
+      <div class="ico ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1 id="okTitle">Your slot is secured!</h1>
+      <p class="l">Welcome to the 2027 UTME Phase 1 class. A confirmation receipt has been issued by Paystack to your email.</p>
+      <dl class="rcpt">
+        <div><dt>Student</dt><dd id="rName">-</dd></div>
+        <div><dt>Plan</dt><dd id="rPlan">-</dd></div>
+        <div><dt>Amount paid</dt><dd id="rAmt">-</dd></div>
+        <div><dt>Reference</dt><dd><span class="ref" id="rRef">-</span><button class="copy" id="copyRef" type="button">Copy</button></dd></div>
+      </dl>
+      <ol class="next">
+        <li>Join the class WhatsApp group so your Family System coach can reach you.</li>
+        <li id="startLine">Classes begin on 20 October. Daily lectures run for 6 hours.</li>
+        <li>Keep your reference above. You may be asked for it if you need support.</li>
+      </ol>
+      <div class="acts">
+        <a class="btn" id="grpBtn" href="#" target="_blank" rel="noopener">Join the WhatsApp group</a>
+        <a class="btn ghost" href="index.html">Back to home</a>
+      </div>
+    </section>
+
+    <!-- received but could not be auto-confirmed -->
+    <section class="rc" id="sPend" hidden>
+      <div class="ico wait"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+      <h1>We're confirming your payment</h1>
+      <p class="l">Paystack accepted your transaction, but we couldn't finish the automatic check just now. Your payment is safe. We'll confirm manually, usually within a few hours.</p>
+      <dl class="rcpt"><div><dt>Reference</dt><dd><span class="ref" id="pRef">-</span><button class="copy" id="copyRef2" type="button">Copy</button></dd></div></dl>
+      <div class="acts">
+        <a class="btn" id="waBtn" href="#" target="_blank" rel="noopener">Message us on WhatsApp</a>
+        <a class="btn ghost" href="index.html">Back to home</a>
+      </div>
+    </section>
+
+    <!-- failed / abandoned / no reference -->
+    <section class="rc" id="sFail" hidden>
+      <div class="ico bad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+      <h1 id="fTitle">Payment not completed</h1>
+      <p class="l" id="fMsg">We couldn't confirm a successful payment. If money left your account, don't pay again. Send us your reference and we'll sort it out.</p>
+      <div class="acts">
+        <a class="btn" href="index.html#enrol">Try again</a>
+        <a class="btn ghost" id="waBtn2" href="#" target="_blank" rel="noopener">Talk to support</a>
+      </div>
+      <p class="fine" id="fRef" hidden>Reference: <span class="ref" id="fRefV"></span></p>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script>
+  (function () {
+    var cfg = window.EOT_CONFIG, $ = function (id) { return document.getElementById(id); };
+    var ref = new URLSearchParams(location.search).get("reference") || new URLSearchParams(location.search).get("trxref");
+    var money = function (n) { return "\u20A6" + Number(n).toLocaleString("en-NG"); };
+    var wa = function (msg) { return "https://wa.me/" + cfg.WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg); };
+    function show(id) { ["sWait", "sOk", "sPend", "sFail"].forEach(function (s) { $(s).hidden = s !== id; }); window.scrollTo(0, 0); }
+
+    function copy(btn, text) { btn.onclick = function () {
+      (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { btn.textContent = "Copied"; }, function () { btn.textContent = "Press Ctrl+C"; });
+      setTimeout(function () { btn.textContent = "Copy"; }, 1800);
+    }; }
+
+    function fail(title, msg) {
+      $("fTitle").textContent = title; if (msg) $("fMsg").textContent = msg;
+      if (ref) { $("fRef").hidden = false; $("fRefV").textContent = ref; }
+      $("waBtn2").href = wa("Hello EOT, my payment didn't go through." + (ref ? " Reference: " + ref : ""));
+      show("sFail");
+    }
+    function pending() {
+      $("pRef").textContent = ref; copy($("copyRef2"), ref);
+      $("waBtn").href = wa("Hello EOT, I just paid for the 2027 UTME class. Reference: " + ref);
+      show("sPend");
+    }
+    function ok(d) {
+      var plan = cfg.PLANS[d.plan] ? cfg.PLANS[d.plan].label : "2027 UTME Phase 1";
+      $("rName").textContent = d.name || "Student";
+      $("rPlan").textContent = plan; $("rAmt").textContent = d.amount ? money(d.amount) : "See your Paystack email receipt";
+      $("rRef").textContent = d.reference; copy($("copyRef"), d.reference);
+      $("okTitle").textContent = "Your slot is secured" + (d.name ? ", " + d.name.split(" ")[0] : "") + "!";
+      $("startLine").textContent = "Classes begin on " + cfg.CLASS_START + ". Daily lectures run for 6 hours.";
+      var g = $("grpBtn");
+      if (cfg.WHATSAPP_GROUP_URL) g.href = cfg.WHATSAPP_GROUP_URL;
+      else { g.href = wa("Hello EOT, I've paid for the 2027 UTME class. Please add me to the group. Reference: " + d.reference); g.textContent = "Message us to get added"; }
+      show("sOk");
+    }
+
+    if (!ref) return fail("No payment found", "We couldn't find a payment reference on this page. If you were just charged, contact us with your payment receipt.");
+
+    /* No backend yet: Paystack's popup only redirects here after a successful payment, so show the receipt. */
+    if (!cfg.VERIFY_ENDPOINT) {
+      var saved = {}; try { saved = JSON.parse(sessionStorage.getItem("eot_last") || "{}"); } catch (x) { }
+      if (saved.ref && saved.ref !== ref) saved = {};
+      var key = saved.plan && cfg.PLANS[saved.plan] ? saved.plan : null;
+      return ok({ name: saved.name || "", plan: key, amount: key ? cfg.PLANS[key].amount : null, reference: ref });
+    }
+
+    var tries = 0;
+    function check() {
+      tries++;
+      fetch(cfg.VERIFY_ENDPOINT + "?reference=" + encodeURIComponent(ref), { cache: "no-store" })
+        .then(function (r) { if (!r.ok && r.status !== 200) throw new Error("http " + r.status); return r.json(); })
+        .then(function (d) {
+          if (d.ok) return ok(d);
+          if ((d.state === "pending" || d.state === "ongoing" || d.state === "processing") && tries < 5) return setTimeout(check, 2500);
+          if (d.state === "amount_mismatch") return pending();
+          if (d.state === "abandoned") return fail("Payment not completed", "Checkout was closed before payment finished, so your slot isn't secured yet.");
+          if (d.state === "failed") return fail("Payment failed", "Your bank declined the transaction. Please try again or use a different card or transfer option.");
+          if (d.state === "unknown") return fail("Payment not found", "We couldn't find this payment on Paystack. Please check the reference or contact support.");
+          pending();
+        })
+        .catch(function () { if (tries < 2) setTimeout(check, 2000); else pending(); });
+    }
+    check();
+  })();
+  </script>
+</body>
+</html>

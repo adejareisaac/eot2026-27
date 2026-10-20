@@ -12,6 +12,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/checkout.css">
 </head>
 
 <body>
@@ -85,8 +86,7 @@
               loading="lazy"></button></div>
       </div>
       <div class="w">
-        <p class="note">Student screenshots shared with EOT. Tap to enlarge. Past results do not guarantee future
-          scores.</p>
+        <p class="note">Student screenshots shared with EOT. Tap to enlarge.</p>
       </div>
     </section>
 
@@ -312,15 +312,40 @@
         <h2 data-reveal>It can be you, starting with a single step.</h2>
         <p class="lead" data-reveal>Our fee costs less than a full plate of rice from Chicken Republic, or a decent
           monthly data plan.</p>
-        <div class="pr">
-          <div class="plan" data-reveal><small>Pay monthly</small><b>₦10k</b>
-            <p>per month</p>
+
+        <form class="co" id="enrolForm" novalidate autocomplete="on">
+          <div class="pr" role="radiogroup" aria-label="Choose your plan">
+            <label class="plan" data-plan="monthly"><input type="radio" name="plan" value="monthly"><span class="tick" aria-hidden="true"></span><small>Pay monthly</small><b>₦10k</b>
+              <p>per month</p>
+            </label>
+            <label class="plan hi is-sel" data-plan="phase1"><input type="radio" name="plan" value="phase1" checked><span class="tick" aria-hidden="true"></span><small>Pay ahead for the entire Phase 1 tutorial</small><b>₦18k</b>
+              <p>for 2 months</p><span class="save">Save ₦2,000</span>
+            </label>
           </div>
-          <div class="plan hi" data-reveal><small>Pay ahead for the entire Phase 1 tutorial</small><b>₦18k</b>
-            <p>for 2 months</p>
+
+          <div class="co-card">
+            <h3>Secure your slot</h3>
+            <p class="sub">Fill in the student's details, then pay securely with Paystack.</p>
+            <div class="cg">
+              <div class="fld full"><label class="t" for="f-name">Student's full name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Adaeze Okafor" required><span class="msg" role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-email">Email address</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><span class="msg" role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-phone">WhatsApp number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="0803 123 4567" required><span class="msg" role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-state">State of residence</label><input id="f-state" name="state" type="text" autocomplete="address-level1" placeholder="e.g. Rivers" required><span class="msg" role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-ref">Referred by <em>(optional)</em></label><input id="f-ref" name="referral" type="text" placeholder="Name of the student who referred you"></div>
+              <div class="fld full"><label class="agree"><input type="checkbox" name="agree"><span>I understand that EOT classes are 100% online</span></label></div>
+            </div>
+
+            <div class="sum"><span>You're paying for<strong id="coPlan">Full Phase 1 (2 months)</strong></span><b id="coTotal">₦18,000</b></div>
+            <p class="co-err" id="coError" role="alert" hidden></p>
+            <button class="btn pay" id="payBtn" type="submit"><span class="spin" aria-hidden="true"></span><span class="lbl">Pay ₦18,000 securely</span></button>
+
+            <div class="secure">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="3"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>Secured by Paystack</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>We never see your card details</span>
+            </div>
+            <div class="cards" aria-label="Payment methods"><i>Card</i><i>Bank transfer</i><i>USSD</i></div>
           </div>
-        </div>
-        <a class="btn" data-join href="#enrol">Join now and secure your slot</a>
+        </form>
       </div>
     </section>
 
@@ -395,10 +420,13 @@
   </footer>
   <dialog id="dl"><button id="dx" aria-label="Close">✕</button><img id="di" alt="Enlarged screenshot"></dialog>
   <script>var JOIN_URL = "#enrol"; /* replace with the real enrolment link */document.querySelectorAll("[data-join]").forEach(function (a) { a.href = JOIN_URL })</script>
+  <script src="https://js.paystack.co/v2/inline.js"></script>
+  <script src="js/config.js"></script>
   <script src="js/gsap.min.js"></script>
   <script src="js/ScrollTrigger.min.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/checkout.js"></script>
 </body>
 
 </html>
