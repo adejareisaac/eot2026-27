@@ -172,15 +172,20 @@ h2 {
     text-decoration: none
 }
 
-.logo i {
+.logo-mark {
     width: 32px;
     height: 32px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--deep), var(--elec));
-    color: #fff;
-    font: 800 12px/32px var(--d);
-    text-align: center;
-    font-style: normal
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0
+}
+
+.logo span {
+    white-space: nowrap
+}
+
+.logo i {
+    display: none
 }
 
 .links {
@@ -652,19 +657,19 @@ h2 {
         min-height: 145px
     }
 
-    .fam > div:first-child {
+    .fam>div:first-child {
         display: contents
     }
 
-    .fam > h2 {
+    .fam h2 {
         grid-row: 1
     }
 
-    .fam > .lead {
+    .fam .lead {
         grid-row: 2
     }
 
-    #family .fam > [data-step-visual] {
+    #family .fam>[data-step-visual] {
         grid-row: 3;
         width: min(100%, 390px);
         justify-self: center;
@@ -672,37 +677,37 @@ h2 {
         z-index: 2
     }
 
-    #family .fam > [data-step-visual] .d3 {
+    #family .fam>[data-step-visual] .d3 {
         width: 100%
     }
 
-    #family .fam > [data-step-visual] .d3 img {
+    #family .fam>[data-step-visual] .d3 img {
         width: 140%;
         max-width: none;
         margin-left: -20%
     }
 
-    #family .fam > [data-step-visual] .d3.missing {
+    #family .fam>[data-step-visual] .d3.missing {
         min-height: 320px
     }
 
-    .fam > .steps {
+    .fam .steps {
         grid-row: 4;
         position: relative;
         z-index: 1
     }
 
-    .fam > .time {
+    .fam .time {
         grid-row: 5
     }
 
-    .fam > p:not(.lead) {
+    .fam>div>p:not(.lead) {
         grid-row: 6
     }
 }
 
 @media(min-width:861px) {
-    #family .fam > [data-step-visual] .d3 img {
+    #family .fam>[data-step-visual] .d3 img {
         width: 130%;
         max-width: none;
         margin-left: -15%
@@ -1151,4 +1156,649 @@ dialog button {
         animation: none !important;
         scroll-behavior: auto !important
     }
+}
+
+/* Premium motion layer. Content stays readable if these never run. */
+::selection {
+    background: #d6e6ff;
+    color: var(--ink)
+}
+
+.stat b,
+.giant,
+.num,
+.dates div,
+.plan b,
+.time,
+[data-counter] {
+    font-variant-numeric: tabular-nums
+}
+
+.stat b span {
+    display: inline-block;
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+    margin: 0;
+    max-width: none
+}
+
+@media (max-width:700px) {
+    .giant {
+        font-size: clamp(104px, 30vw, 142px)
+    }
+}
+
+.top {
+    transition: box-shadow .3s ease, background-color .3s ease
+}
+
+.top.scrolled {
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 12px 30px -20px rgba(16, 24, 40, .45)
+}
+
+.links a:not(.btn) {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 1.5px;
+    transition: color .2s ease, background-size .35s ease;
+    padding-bottom: 2px
+}
+
+.links a:not(.btn):hover,
+.links a.is-on:not(.btn) {
+    color: var(--blue);
+    background-size: 100% 1.5px
+}
+
+.btn {
+    position: relative;
+    transition: translate .18s ease, box-shadow .18s ease, scale .15s ease
+}
+
+.btn:hover {
+    transform: none;
+    translate: 0 -2px
+}
+
+.btn:active {
+    transform: none;
+    translate: 0 1px;
+    scale: .96
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(110deg, transparent 34%, rgba(255, 255, 255, .45) 50%, transparent 66%);
+    background-size: 220% 100%;
+    background-position: 130% 0;
+    pointer-events: none
+}
+
+.btn:hover::before {
+    animation: btnshine .75s ease
+}
+
+.scrubbar {
+    box-shadow: 0 0 12px rgba(23, 105, 255, .55)
+}
+
+.hero {
+    position: relative;
+    --mx: 50%;
+    --my: 34%
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    left: var(--mx);
+    top: var(--my);
+    width: min(680px, 78vw);
+    height: min(680px, 78vw);
+    translate: -50% -50%;
+    background: radial-gradient(circle, rgba(72, 160, 255, .22), rgba(72, 160, 255, 0) 68%);
+    pointer-events: none;
+    z-index: 0
+}
+
+.hero .w {
+    position: relative;
+    z-index: 1
+}
+
+.hero .stack .d3.missing {
+    z-index: 0;
+    min-height: 0;
+    height: 0;
+    border: 0;
+    background: none;
+    overflow: hidden
+}
+
+.hero .stack .d3.missing figcaption {
+    display: none
+}
+
+.tilt {
+    height: 100%
+}
+
+.giant {
+    background-size: 100% 180%;
+    animation: giantShift 9s ease-in-out infinite
+}
+
+.cue {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    translate: -50% 0;
+    width: 24px;
+    height: 38px;
+    border: 1.5px solid rgba(23, 105, 255, .45);
+    border-radius: 99px;
+    z-index: 3
+}
+
+.cue span {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 4px;
+    height: 8px;
+    margin-left: -2px;
+    border-radius: 99px;
+    background: var(--blue);
+    animation: wheel 1.5s ease-in-out infinite
+}
+
+@media (min-width:900px) and (min-height:820px) {
+    .cue {
+        display: block
+    }
+}
+
+.pill.on {
+    animation: pillin .55s cubic-bezier(.16, 1, .3, 1) both
+}
+
+.rule {
+    display: block;
+    width: 64px;
+    height: 3px;
+    border-radius: 99px;
+    margin-top: 16px;
+    background: linear-gradient(90deg, var(--blue), var(--elec));
+    justify-self: start
+}
+
+.c .rule,
+.fin .rule {
+    margin-inline: auto
+}
+
+.fin .rule {
+    background: rgba(255, 255, 255, .92)
+}
+
+.beats {
+    position: relative
+}
+
+.beats.has-rail .beat {
+    border-left-color: transparent
+}
+
+.beats.has-rail .beat.on h3 {
+    color: var(--blue)
+}
+
+.rail {
+    position: absolute;
+    left: 0;
+    width: 4px;
+    border-radius: 99px;
+    background: #e6eefb;
+    overflow: hidden;
+    pointer-events: none
+}
+
+.rail i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(var(--elec), var(--blue));
+    transform: scaleY(0);
+    transform-origin: top center
+}
+
+.bead {
+    position: absolute;
+    left: -5px;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid var(--blue);
+    box-shadow: 0 6px 14px -6px rgba(23, 105, 255, .9);
+    z-index: 2;
+    pointer-events: none
+}
+
+.track button img {
+    transition: scale .55s ease
+}
+
+.track button:hover img {
+    scale: 1.04
+}
+
+.track button.missing {
+    aspect-ratio: 1;
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(90px 70px at 50% 42%, rgba(72, 160, 255, .18), transparent 70%),
+        linear-gradient(180deg, #fff, #eef5ff)
+}
+
+.track button.missing img {
+    display: none
+}
+
+.track button.missing::after {
+    content: "Screenshot";
+    font: 600 13px var(--b);
+    color: var(--deep)
+}
+
+.track button.tall.missing {
+    aspect-ratio: 3/5;
+    min-height: 360px
+}
+
+.d3.missing {
+    border-style: solid;
+    border-color: rgba(72, 160, 255, .28);
+    background:
+        radial-gradient(90px 70px at 50% 40%, rgba(72, 160, 255, .2), transparent 72%),
+        linear-gradient(180deg, #f8fbff, #e7f1ff)
+}
+
+.pz.first .d3.missing {
+    border-color: rgba(255, 255, 255, .7);
+    background: rgba(255, 255, 255, .1)
+}
+
+.photo.missing {
+    border-style: solid;
+    border-color: rgba(72, 160, 255, .28);
+    background:
+        radial-gradient(140px 100px at 50% 42%, rgba(72, 160, 255, .18), transparent 70%),
+        linear-gradient(180deg, #f8fbff, #e7f1ff)
+}
+
+.ref button.missing {
+    width: 150px;
+    height: 188px;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #fff, var(--ice));
+    display: grid;
+    place-items: center
+}
+
+.ref button.missing img {
+    display: none
+}
+
+.ref button.missing::after {
+    content: "Receipt";
+    font: 600 12px var(--b);
+    color: var(--deep)
+}
+
+.play::after {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, .75);
+    animation: ping 2.2s ease-out infinite;
+    pointer-events: none
+}
+
+.f {
+    transition: border-color .35s ease, box-shadow .35s ease, translate .35s ease
+}
+
+.f.hot {
+    border-color: #c5dbff;
+    box-shadow: 0 28px 44px -28px rgba(23, 105, 255, .7);
+    translate: 0 -4px
+}
+
+.pz {
+    transition: translate .25s ease
+}
+
+.pz:hover {
+    translate: 0 -6px
+}
+
+.ck {
+    overflow: clip
+}
+
+.dates {
+    overflow: clip
+}
+
+.bridge {
+    flex: 1 1 36px;
+    align-self: end;
+    height: 3px;
+    min-width: 28px;
+    max-width: 150px;
+    margin: 0 6px 22px;
+    border-radius: 99px;
+    background: rgba(23, 105, 255, .16);
+    overflow: hidden
+}
+
+.bridge i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--elec));
+    transform-origin: left center
+}
+
+.plan {
+    position: relative
+}
+
+.plan.hi {
+    overflow: hidden;
+    animation: planGlow 3.6s ease-in-out infinite
+}
+
+.plan.hi::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -30%;
+    width: 38%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+    transform: translateX(-130%);
+    pointer-events: none
+}
+
+.plan.hi.sweep::after {
+    animation: sweep 1.15s ease forwards
+}
+
+.fin {
+    position: relative
+}
+
+.fin::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -30%;
+    width: min(560px, 80vw);
+    height: min(560px, 80vw);
+    translate: -50% 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, .16), transparent 68%);
+    pointer-events: none
+}
+
+.fin .w {
+    position: relative;
+    z-index: 1
+}
+
+dialog[open] {
+    animation: pop .32s cubic-bezier(.16, 1, .3, 1)
+}
+
+dialog::backdrop {
+    animation: fade .28s ease
+}
+
+@media (max-width:700px) {
+    .logo {
+        font-size: 15px
+    }
+
+    /* Compact, premium floating CTA */
+    .pill {
+        left: 50%;
+        right: auto;
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+        transform: translateX(-50%);
+        justify-content: center;
+        gap: 14px;
+        padding: 6px 6px 6px 18px;
+        white-space: nowrap;
+        background: rgba(255, 255, 255, .82);
+        -webkit-backdrop-filter: blur(18px) saturate(1.6);
+        backdrop-filter: blur(18px) saturate(1.6);
+        border: 1px solid rgba(255, 255, 255, .9);
+        box-shadow: 0 0 0 1px rgba(16, 71, 184, .08), 0 14px 30px -10px rgba(16, 71, 184, .45), 0 2px 6px rgba(16, 24, 40, .06)
+    }
+
+    .pill[data-subnav]:not(.on) {
+        transform: translate(-50%, 16px)
+    }
+
+    .pill>span {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -.005em;
+        line-height: 1;
+        color: var(--ink)
+    }
+
+    .pill>span::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, .2)
+    }
+
+    .pill .btn.sm {
+        flex: none;
+        min-height: 38px;
+        padding: 0 18px;
+        font-size: 14.5px;
+        font-weight: 700
+    }
+}
+
+@media (max-width:360px) {
+    .pill {
+        gap: 10px;
+        padding-left: 14px
+    }
+
+    .pill>span {
+        font-size: 13px
+    }
+
+    .pill .btn.sm {
+        padding: 0 15px;
+        font-size: 14px
+    }
+}
+
+@keyframes pillinm {
+    from {
+        opacity: 0;
+        transform: translateY(14px)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@media (max-width:700px) {
+    .pill.on {
+        animation-name: pillin
+    }
+}
+
+@media (max-width:900px) {
+    .links.open a {
+        animation: linkin .42s ease both
+    }
+
+    .links.open a:nth-child(2) {
+        animation-delay: .04s
+    }
+
+    .links.open a:nth-child(3) {
+        animation-delay: .08s
+    }
+
+    .links.open a:nth-child(4) {
+        animation-delay: .12s
+    }
+
+    .links.open a:nth-child(5) {
+        animation-delay: .16s
+    }
+
+    .links.open a:nth-child(6) {
+        animation-delay: .2s
+    }
+
+    .links.open a:nth-child(7) {
+        animation-delay: .24s
+    }
+}
+
+@keyframes btnshine {
+    from {
+        background-position: 130% 0
+    }
+
+    to {
+        background-position: -30% 0
+    }
+}
+
+@keyframes giantShift {
+
+    0%,
+    100% {
+        background-position: 50% 0
+    }
+
+    50% {
+        background-position: 50% 100%
+    }
+}
+
+@keyframes wheel {
+    0% {
+        transform: translateY(0);
+        opacity: 1
+    }
+
+    100% {
+        transform: translateY(12px);
+        opacity: 0
+    }
+}
+
+@keyframes pillin {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 14px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0)
+    }
+}
+
+@keyframes ping {
+    0% {
+        transform: scale(.92);
+        opacity: .65
+    }
+
+    100% {
+        transform: scale(1.28);
+        opacity: 0
+    }
+}
+
+@keyframes planGlow {
+    50% {
+        box-shadow: 0 40px 60px -28px rgba(23, 105, 255, .55), 0 0 0 1px rgba(72, 160, 255, .35)
+    }
+}
+
+@keyframes sweep {
+    to {
+        transform: translateX(380%)
+    }
+}
+
+@keyframes pop {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(.97)
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0
+    }
+}
+
+@keyframes linkin {
+    from {
+        opacity: 0;
+        transform: translateY(8px)
+    }
+
+    to {
+        opacity: 1;
+        transform: none
+    }
+}
+
+.step>div,
+.step h3,
+.step p {
+    min-width: 0;
+    overflow-wrap: break-word
+}
+
+.step h3,
+.step p {
+    grid-column: 2
 }
