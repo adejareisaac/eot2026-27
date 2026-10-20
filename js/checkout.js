@@ -80,13 +80,33 @@
     return "EOT-" + Date.now().toString(36).toUpperCase() + "-" + r;
   }
 
+  /* ---------- Paystack script: loaded on demand, not with the page ---------- */
+  var psPromise = null;
+  function loadPaystack() {
+    if (window.PaystackPop) return Promise.resolve();
+    if (psPromise) return psPromise;
+    psPromise = new Promise(function (res, rej) {
+      var s = document.createElement("script");
+      s.src = "https://js.paystack.co/v2/inline.js"; s.async = true;
+      s.onload = res;
+      s.onerror = function () { psPromise = null; if (s.parentNode) s.parentNode.removeChild(s); rej(new Error("load")); };
+      document.head.appendChild(s);
+    });
+    return psPromise;
+  }
+  function warm() { loadPaystack().catch(function () { }); }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { warm(); io.disconnect(); } }, { rootMargin: "900px 0px" });
+    io.observe(form);
+  }
+  form.addEventListener("focusin", warm, { once: true });
+
   /* ---------- pay ---------- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     clearError();
     if (!validate()) return;
 
-    if (!window.PaystackPop) { showError("Payment could not load. Check your internet connection and try again."); return; }
     if (!cfg.PAYSTACK_PUBLIC_KEY || /REPLACE/.test(cfg.PAYSTACK_PUBLIC_KEY)) { showError("Payments are not switched on yet. Please contact EOT on WhatsApp to enrol."); return; }
 
     var key = selected(), plan = cfg.PLANS[key];
@@ -96,6 +116,12 @@
     var reference = ref();
 
     busy(true, "Opening secure checkout\u2026");
+    loadPaystack().then(openCheckout, function () {
+      busy(false);
+      showError("Payment could not load. Check your internet connection and try again.");
+    });
+
+    function openCheckout() {
     try {
       new window.PaystackPop().newTransaction({
         key: cfg.PAYSTACK_PUBLIC_KEY,
@@ -133,6 +159,7 @@
     } catch (err) {
       busy(false);
       showError("Something went wrong opening checkout. Please try again.");
+    }
     }
   });
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-loading">
 
 <head>
   <meta charset="utf-8">
@@ -11,13 +11,49 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
     rel="stylesheet">
+  <style id="eot-boot">
+    html{scrollbar-gutter:stable}
+    html.is-loading,html.is-loading body{overflow:hidden}
+    #loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:radial-gradient(900px 520px at 50% 28%,#EAF3FF,transparent 70%),#fff;transition:opacity .45s .05s ease,visibility 0s .5s}
+    #loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
+    .ld-box{width:min(340px,80vw);text-align:center;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s,filter .45s}
+    #loader.is-done .ld-box{transform:scale(1.5);opacity:0;filter:blur(10px)}
+    .ld-logo{position:relative;width:96px;height:96px;margin:0 auto 22px;display:grid;place-items:center;border-radius:28px;background:#fff;box-shadow:0 24px 50px -22px rgba(23,105,255,.55),0 0 0 1px #E2E8F0;animation:ldfloat 2.6s ease-in-out infinite}
+    .ld-logo img{width:62px;height:62px;object-fit:contain;position:relative}
+    .ld-logo i{position:absolute;inset:-12px;border-radius:36px;border:2px solid #48A0FF;opacity:0;animation:ldping 2s ease-out infinite}
+    .ld-logo i:nth-child(2){animation-delay:1s}
+    .ld-fallback{position:absolute;font:800 26px/1 'Plus Jakarta Sans',system-ui,sans-serif;color:#1769FF;letter-spacing:-.04em}
+    .ld-logo:not(.nologo) .ld-fallback{display:none}
+    .ld-name{font:700 18px/1.2 'Plus Jakarta Sans',system-ui,sans-serif;color:#101828;letter-spacing:-.02em}
+    .ld-track{height:6px;border-radius:99px;background:#E2E8F0;overflow:hidden;margin:22px 0 12px}
+    .ld-bar{height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#1769FF,#48A0FF);border-radius:99px}
+    .ld-meta{display:flex;justify-content:space-between;gap:12px;font:500 13.5px Inter,system-ui,sans-serif;color:#64748B}
+    .ld-pct{font-variant-numeric:tabular-nums;font-weight:600;color:#1769FF}
+    @keyframes ldping{from{opacity:.65;transform:scale(.88)}to{opacity:0;transform:scale(1.3)}}
+    @keyframes ldfloat{50%{transform:translateY(-6px)}}
+    /* lazy images fade in once loaded (only active when lazy.js is running) */
+    .lz-on img[loading="lazy"]:not(.is-in){opacity:0}
+    .lz-on img.is-in{animation:lzin .8s ease backwards}
+    @keyframes lzin{from{opacity:0;transform:scale(1.03)}}
+    @media (prefers-reduced-motion:reduce){.ld-logo,.ld-logo i{animation:none}.ld-box,#loader{transition-duration:.01s!important}.lz-on img.is-in{animation:none}}
+  </style>
+  <noscript><style>#loader{display:none!important}html.is-loading,html.is-loading body{overflow:auto!important}.lz-on img[loading="lazy"]{opacity:1!important}</style></noscript>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/checkout.css">
 </head>
 
 <body>
+  <div id="loader" role="status" aria-live="polite" aria-label="Loading Explicit Online Tutorial">
+    <div class="ld-box">
+      <div class="ld-logo"><i></i><i></i><b class="ld-fallback">EOT</b><img src="assets/img/eot-logo.png" alt="" width="62" height="62" data-critical decoding="async" onerror="this.parentNode.classList.add('nologo');this.style.display='none'"></div>
+      <div class="ld-name">Explicit Online Tutorial</div>
+      <div class="ld-track" aria-hidden="true"><div class="ld-bar"></div></div>
+      <div class="ld-meta"><span class="ld-msg">Warming up the classroom</span><span class="ld-pct" aria-hidden="true">0%</span></div>
+    </div>
+  </div>
+  <script src="js/loader.js"></script>
   <header class="top">
-    <div class="w nav"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark"><span>Explicit Online Tutorial</span></a><button class="burger"
+    <div class="w nav"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark" data-critical decoding="async" fetchpriority="high"><span>Explicit Online Tutorial</span></a><button class="burger"
         aria-label="Open menu" aria-expanded="false" aria-controls="lk">☰</button>
       <nav class="links" id="lk" aria-label="Main"><a href="#results">Results</a><a href="#story">Our story</a><a
           href="#classes">Classes</a><a href="#family">Family system</a><a href="#programme">2027 class</a><a
@@ -32,8 +68,7 @@
         <div class="stack">
           <div class="floor" aria-hidden="true"></div>
           <div class="giant" data-scrub="scale" aria-hidden="true">300+</div>
-          <figure class="d3 " data-scrub='float' data-depth='40'><img src="assets/3d/hero-scene.webp" alt=""
-              loading="lazy">
+          <figure class="d3 " data-scrub='float' data-depth='40'><img src="assets/3d/hero-scene.webp" alt="" data-critical decoding="async" fetchpriority="high">
             <figcaption>3D file needed:<br>assets/3d/hero-scene.webp<br>Floating books, laptop, exam sheets and question
               cards, transparent background</figcaption>
           </figure>
@@ -70,20 +105,13 @@
       </div>
       <div class="track" data-hscroll>
         <div class="track-inner" data-track style="display:contents"><button data-zoom="assets/img/results-01.jpg"
-            class=""><img src="assets/img/results-01.jpg" alt="Student result or testimonial screenshot shared with EOT"
-              loading="lazy"></button><button data-zoom="assets/img/results-02.jpg" class=""><img
-              src="assets/img/results-02.jpg" alt="Student result or testimonial screenshot shared with EOT"
-              loading="lazy"></button><button data-zoom="assets/img/results-03.jpg" class=""><img
-              src="assets/img/results-03.jpg" alt="Student result or testimonial screenshot shared with EOT"
-              loading="lazy"></button><button data-zoom="assets/img/results-04.jpg" class=""><img
-              src="assets/img/results-04.jpg" alt="Student result or testimonial screenshot shared with EOT"
-              loading="lazy"></button><button data-zoom="assets/img/results-05.jpg" class=""><img
-              src="assets/img/results-05.jpg" alt="Student result or testimonial screenshot shared with EOT"
-              loading="lazy"></button><button data-zoom="assets/img/results-06.jpg" class=""><img
-              src="assets/img/results-06.jpg" alt="Student result or testimonial screenshot shared with EOT"
-              loading="lazy"></button><button data-zoom="assets/img/results-07.jpg" class=""><img
-              src="assets/img/results-07.jpg" alt="Student result or testimonial screenshot shared with EOT"
-              loading="lazy"></button></div>
+            class=""><img src="assets/img/results-01.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-02.jpg" class=""><img
+              src="assets/img/results-02.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-03.jpg" class=""><img
+              src="assets/img/results-03.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-04.jpg" class=""><img
+              src="assets/img/results-04.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-05.jpg" class=""><img
+              src="assets/img/results-05.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-06.jpg" class=""><img
+              src="assets/img/results-06.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-07.jpg" class=""><img
+              src="assets/img/results-07.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button></div>
       </div>
       <div class="w">
         <p class="note">Student screenshots shared with EOT. Tap to enlarge.</p>
@@ -95,7 +123,7 @@
         <div data-step-visual>
           <div class="num" data-scrub="scale">316</div>
           <figure class="d3" style="margin-top:24px;max-width:340px"><img src="assets/img/founder.jpg"
-              alt="Ige Emmanuel, founder of EOT" loading="lazy" style="filter:none;border-radius:28px">
+              alt="Ige Emmanuel, founder of EOT" style="filter:none;border-radius:28px" loading="lazy" decoding="async">
             <figcaption>Founder photo needed:<br>assets/img/founder.jpg</figcaption>
           </figure>
         </div>
@@ -132,17 +160,12 @@
       </div>
       <div class="track" data-hscroll>
         <div data-track style="display:contents"><button data-zoom="assets/img/chat-01.jpg" class=""><img
-              src="assets/img/chat-01.jpg" alt="Student testimonial screenshot about EOT"
-              loading="lazy"></button><button data-zoom="assets/img/chat-02.jpg" class=""><img
-              src="assets/img/chat-02.jpg" alt="Student testimonial screenshot about EOT"
-              loading="lazy"></button><button data-zoom="assets/img/chat-03.jpg" class=""><img
-              src="assets/img/chat-03.jpg" alt="Student testimonial screenshot about EOT"
-              loading="lazy"></button><button data-zoom="assets/img/chat-04.jpg" class=""><img
-              src="assets/img/chat-04.jpg" alt="Student testimonial screenshot about EOT"
-              loading="lazy"></button><button data-zoom="assets/img/chat-05.png" class="tall"><img
-              src="assets/img/chat-05.png" alt="Student testimonial screenshot about EOT"
-              loading="lazy"></button><button data-zoom="assets/img/chat-06.png" class="tall"><img
-              src="assets/img/chat-06.png" alt="Student testimonial screenshot about EOT" loading="lazy"></button></div>
+              src="assets/img/chat-01.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-02.jpg" class=""><img
+              src="assets/img/chat-02.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-03.jpg" class=""><img
+              src="assets/img/chat-03.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-04.jpg" class=""><img
+              src="assets/img/chat-04.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-05.png" class="tall"><img
+              src="assets/img/chat-05.png" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-06.png" class="tall"><img
+              src="assets/img/chat-06.png" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button></div>
       </div>
     </section>
 
@@ -153,7 +176,7 @@
           easy to understand. Even students who don't like online classes now prefer EOT classes because of the way it
           is structured.</p>
         <div class="stage" data-expand><video id="vd" controls preload="none" playsinline
-            poster="assets/video/class-poster.jpg" aria-label="EOT class highlight">
+            data-poster="assets/video/class-poster.jpg" aria-label="EOT class highlight">
             <source src="assets/video/class-highlight.mp4" type="video/mp4">
           </video><button class="play" id="pl" aria-label="Play class preview">▶</button></div>
       </div>
@@ -189,7 +212,7 @@
             addition to the 6 hours daily lecture.</p>
         </div>
         <div data-step-visual>
-          <figure class="d3 "><img src="assets/3d/clock-3d.webp" alt="" loading="lazy">
+          <figure class="d3 "><img src="assets/3d/clock-3d.webp" alt="" loading="lazy" decoding="async">
             <figcaption>3D file needed:<br>assets/3d/clock-3d.webp<br>A glossy blue alarm clock or study desk with a
               floating calendar</figcaption>
           </figure>
@@ -205,7 +228,7 @@
             <h3>A compulsory mock test every week</h3>
             <p>Similar to the actual UTME standard. Most times, our students get to see similar questions in the main
               exam (word for word).</p>
-            <figure class="d3 "><img src="assets/3d/feature-mock.webp" alt="" loading="lazy">
+            <figure class="d3 "><img src="assets/3d/feature-mock.webp" alt="" loading="lazy" decoding="async">
               <figcaption>3D file needed:<br>assets/3d/feature-mock.webp<br>Stack of exam sheets with a pencil
               </figcaption>
             </figure>
@@ -214,7 +237,7 @@
             <h3>Lifetime access to all classes</h3>
             <p>Even if you change your phone, just log in on the new phone and see the previous classes, which you won't
               get in a physical tutorial.</p>
-            <figure class="d3 "><img src="assets/3d/feature-replay.webp" alt="" loading="lazy">
+            <figure class="d3 "><img src="assets/3d/feature-replay.webp" alt="" loading="lazy" decoding="async">
               <figcaption>3D file needed:<br>assets/3d/feature-replay.webp<br>Phone showing a play button</figcaption>
             </figure>
           </div>
@@ -225,14 +248,14 @@
           <div class="f" data-reveal>
             <h3>Detailed PDF summary notes</h3>
             <p>Before any class.</p>
-            <figure class="d3 "><img src="assets/3d/feature-notes.webp" alt="" loading="lazy">
+            <figure class="d3 "><img src="assets/3d/feature-notes.webp" alt="" loading="lazy" decoding="async">
               <figcaption>3D file needed:<br>assets/3d/feature-notes.webp<br>Stacked PDF documents</figcaption>
             </figure>
           </div>
           <div class="f" data-reveal>
             <h3>Highly repeated UTME questions</h3>
             <p>So you'll likely see repeated questions in your UTME.</p>
-            <figure class="d3 "><img src="assets/3d/feature-questions.webp" alt="" loading="lazy">
+            <figure class="d3 "><img src="assets/3d/feature-questions.webp" alt="" loading="lazy" decoding="async">
               <figcaption>3D file needed:<br>assets/3d/feature-questions.webp<br>Floating question cards</figcaption>
             </figure>
           </div>
@@ -256,7 +279,7 @@
               <span>English</span><span>Mathematics</span><span>Physics</span><span>Chemistry</span><span>Biology</span>
             </div>
             <figure class="photo" data-reveal>
-              <img src="assets/img/programme-photo.jpg" alt="EOT founder and students" loading="lazy">
+              <img src="assets/img/programme-photo.jpg" alt="EOT founder and students" loading="lazy" decoding="async">
               <figcaption>Your photo goes here:<br>assets/img/programme-photo.jpg<br>(Dr Ige, the EOT team, or a student
                 giving a thumbs up)</figcaption>
             </figure>
@@ -281,17 +304,17 @@
           EOT a 200k cash prize. This year we've curated something spectacular for our top scorers.</p>
         <div class="rw">
           <div class="pz" data-reveal><em>2nd runner up</em><b>An iPad</b>
-            <figure class="d3 "><img src="assets/3d/reward-ipad.webp" alt="" loading="lazy">
+            <figure class="d3 "><img src="assets/3d/reward-ipad.webp" alt="" loading="lazy" decoding="async">
               <figcaption>3D file needed:<br>assets/3d/reward-ipad.webp<br>Tablet floating at an angle</figcaption>
             </figure>
           </div>
           <div class="pz first" data-reveal><em>Overall top scorer</em><b>A brand new laptop from EOT</b>
-            <figure class="d3 "><img src="assets/3d/reward-laptop.webp" alt="" loading="lazy">
+            <figure class="d3 "><img src="assets/3d/reward-laptop.webp" alt="" loading="lazy" decoding="async">
               <figcaption>3D file needed:<br>assets/3d/reward-laptop.webp<br>Open laptop with blue glow</figcaption>
             </figure>
           </div>
           <div class="pz" data-reveal><em>2026 top scorer</em><b>₦200,000 cash</b>
-            <figure class="d3 "><img src="assets/3d/reward-cash.webp" alt="" loading="lazy">
+            <figure class="d3 "><img src="assets/3d/reward-cash.webp" alt="" loading="lazy" decoding="async">
               <figcaption>3D file needed:<br>assets/3d/reward-cash.webp<br>Gift box or stack of notes</figcaption>
             </figure>
           </div>
@@ -302,7 +325,7 @@
             <p>Imagine referring 100 students within a month. That's 150k for you.</p>
           </div><button data-zoom="assets/img/project300-receipt.jpg"
             aria-label="Enlarge 2026 prize payment receipt"><img src="assets/img/project300-receipt.jpg"
-              alt="Receipt for the 2026 Project 300+ cash prize" loading="lazy"></button>
+              alt="Receipt for the 2026 Project 300+ cash prize" loading="lazy" decoding="async"></button>
         </div>
       </div>
     </section>
@@ -415,18 +438,18 @@
     </section>
   </main>
   <footer>
-    <div class="w fw"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark"><span>Explicit Online Tutorial</span></a><span>2027 Phase 1 UTME class ·
+    <div class="w fw"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark" loading="lazy" decoding="async"><span>Explicit Online Tutorial</span></a><span>2027 Phase 1 UTME class ·
         20 October to 20 December</span></div>
   </footer>
   <dialog id="dl"><button id="dx" aria-label="Close">✕</button><img id="di" alt="Enlarged screenshot"></dialog>
   <script>var JOIN_URL = "#enrol"; /* replace with the real enrolment link */document.querySelectorAll("[data-join]").forEach(function (a) { a.href = JOIN_URL })</script>
-  <script src="https://js.paystack.co/v2/inline.js"></script>
-  <script src="js/config.js"></script>
-  <script src="js/gsap.min.js"></script>
-  <script src="js/ScrollTrigger.min.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/checkout.js"></script>
+  <script defer src="js/config.js"></script>
+  <script defer src="js/gsap.min.js"></script>
+  <script defer src="js/ScrollTrigger.min.js"></script>
+  <script defer src="js/ui.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/checkout.js"></script>
+  <script defer src="js/lazy.js"></script>
 </body>
 
 </html>

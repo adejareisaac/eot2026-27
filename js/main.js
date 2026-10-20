@@ -110,14 +110,32 @@
     cue.innerHTML = "<span></span>";
     if (hero) hero.appendChild(cue);
 
-    gsap.timeline({ defaults: { ease: "power4.out" } })
-        .from(floor, { scaleX: 0.3, autoAlpha: 0, duration: 1.3 }, 0)
-        .from(giant, { yPercent: 45, scale: 0.55, autoAlpha: 0, duration: 1.5 }, 0.1)
-        .from(scene, { y: 180, scale: 0.45, rotateX: 45, autoAlpha: 0, duration: 1.5, transformPerspective: 900 }, 0.35)
-        .from(h1w, { yPercent: 120, autoAlpha: 0, stagger: 0.012, duration: 0.8 }, 0.42)
-        .from(lead, { y: 40, autoAlpha: 0, duration: 0.85 }, 0.62)
-        .from($$(".cta a", hero), { y: 24, autoAlpha: 0, stagger: 0.08, duration: 0.7 }, 0.78)
-        .from(cue, { autoAlpha: 0, y: 12, duration: 0.6 }, 1.05);
+    /* ---------- hero intro: everything starts zoomed in from the screen and settles into place ---------- */
+    var inner = $("[data-pin-inner]", hero);
+    h1w.forEach(function (w) { w.parentNode.style.overflow = "visible"; }); /* let scaled words leave their mask */
+    var soft = function (b) { return "blur(" + b + "px) opacity(0)"; }, sharp = "blur(0px) opacity(1)";
+    var ctaBtns = $$(".cta a", hero);
+    var intro = gsap.timeline({
+        paused: true, defaults: { ease: "expo.out" },
+        onComplete: function () {
+            gsap.set([floor, giant, scene, h1, lead, cue].concat(ctaBtns), { clearProps: "filter" });
+            if (inner) gsap.set(inner, { clearProps: "transform" });
+            if (topbar) gsap.set(topbar, { clearProps: "transform,opacity,visibility" });
+        }
+    });
+    if (inner) intro.fromTo(inner, { scale: 1.7, transformOrigin: "50% 38%" }, { scale: 1, duration: 2.4 }, 0);
+    intro
+        .fromTo(floor, { scaleY: 2.6, filter: soft(18) }, { scaleY: 1, filter: sharp, duration: 1.9 }, 0)
+        .fromTo(giant, { scale: 2.0, filter: soft(22) }, { scale: 1, filter: sharp, duration: 2.1 }, 0.05)
+        .fromTo(scene, { scale: 1.8, filter: soft(18) }, { scale: 1, filter: sharp, duration: 2.1 }, 0.2)
+        .fromTo(h1, { scale: 1.5, filter: soft(16) }, { scale: 1, filter: sharp, duration: 1.8 }, 0.42)
+        .fromTo(lead, { scale: 1.4, filter: soft(14) }, { scale: 1, filter: sharp, duration: 1.7 }, 0.62)
+        .fromTo(ctaBtns, { scale: 1.5, filter: soft(12) }, { scale: 1, filter: sharp, duration: 1.5, stagger: 0.1 }, 0.8)
+        .fromTo(cue, { filter: soft(8) }, { filter: sharp, duration: 0.9 }, 1.5);
+    if (topbar) intro.fromTo(topbar, { yPercent: -100, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1.2, ease: "power4.out" }, 0.9);
+    var introPlayed = false;
+    window.EOT_playIntro = function () { if (introPlayed) return; introPlayed = true; intro.play(0); };
+    if (!document.documentElement.classList.contains("is-loading")) window.EOT_playIntro(); /* loader already gone */
 
     function heroScroll(pin) {
         var tl = gsap.timeline({
