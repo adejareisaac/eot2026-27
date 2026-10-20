@@ -12,32 +12,191 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
     rel="stylesheet">
   <style id="eot-boot">
-    html{scrollbar-gutter:stable}
-    html.is-loading,html.is-loading body{overflow:hidden}
-    #loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:radial-gradient(900px 520px at 50% 28%,#EAF3FF,transparent 70%),#fff;transition:opacity .45s .05s ease,visibility 0s .5s}
-    #loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
-    .ld-box{width:min(340px,80vw);text-align:center;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s,filter .45s}
-    #loader.is-done .ld-box{transform:scale(1.5);opacity:0;filter:blur(10px)}
-    .ld-logo{position:relative;width:96px;height:96px;margin:0 auto 22px;display:grid;place-items:center;border-radius:28px;background:#fff;box-shadow:0 24px 50px -22px rgba(23,105,255,.55),0 0 0 1px #E2E8F0;animation:ldfloat 2.6s ease-in-out infinite}
-    .ld-logo img{width:62px;height:62px;object-fit:contain;position:relative}
-    .ld-logo i{position:absolute;inset:-12px;border-radius:36px;border:2px solid #48A0FF;opacity:0;animation:ldping 2s ease-out infinite}
-    .ld-logo i:nth-child(2){animation-delay:1s}
-    .ld-fallback{position:absolute;font:800 26px/1 'Plus Jakarta Sans',system-ui,sans-serif;color:#1769FF;letter-spacing:-.04em}
-    .ld-logo:not(.nologo) .ld-fallback{display:none}
-    .ld-name{font:700 18px/1.2 'Plus Jakarta Sans',system-ui,sans-serif;color:#101828;letter-spacing:-.02em}
-    .ld-track{height:6px;border-radius:99px;background:#E2E8F0;overflow:hidden;margin:22px 0 12px}
-    .ld-bar{height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#1769FF,#48A0FF);border-radius:99px}
-    .ld-meta{display:flex;justify-content:space-between;gap:12px;font:500 13.5px Inter,system-ui,sans-serif;color:#64748B}
-    .ld-pct{font-variant-numeric:tabular-nums;font-weight:600;color:#1769FF}
-    @keyframes ldping{from{opacity:.65;transform:scale(.88)}to{opacity:0;transform:scale(1.3)}}
-    @keyframes ldfloat{50%{transform:translateY(-6px)}}
+    html {
+      scrollbar-gutter: stable
+    }
+
+    html.is-loading,
+    html.is-loading body {
+      overflow: hidden
+    }
+
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(900px 520px at 50% 28%, #EAF3FF, transparent 70%), #fff;
+      transition: opacity .45s .05s ease, visibility 0s .5s
+    }
+
+    #loader.is-done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none
+    }
+
+    .ld-box {
+      width: min(340px, 80vw);
+      text-align: center;
+      transition: transform .6s cubic-bezier(.16, 1, .3, 1), opacity .4s, filter .45s
+    }
+
+    #loader.is-done .ld-box {
+      transform: scale(1.5);
+      opacity: 0;
+      filter: blur(10px)
+    }
+
+    .ld-logo {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 28px;
+      background: #fff;
+      box-shadow: 0 24px 50px -22px rgba(23, 105, 255, .55), 0 0 0 1px #E2E8F0;
+      animation: ldfloat 2.6s ease-in-out infinite
+    }
+
+    .ld-logo img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      position: relative
+    }
+
+    .ld-logo i {
+      position: absolute;
+      inset: -12px;
+      border-radius: 36px;
+      border: 2px solid #48A0FF;
+      opacity: 0;
+      animation: ldping 2s ease-out infinite
+    }
+
+    .ld-logo i:nth-child(2) {
+      animation-delay: 1s
+    }
+
+    .ld-fallback {
+      position: absolute;
+      font: 800 26px/1 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: #1769FF;
+      letter-spacing: -.04em
+    }
+
+    .ld-logo:not(.nologo) .ld-fallback {
+      display: none
+    }
+
+    .ld-name {
+      font: 700 18px/1.2 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: #101828;
+      letter-spacing: -.02em
+    }
+
+    .ld-track {
+      height: 6px;
+      border-radius: 99px;
+      background: #E2E8F0;
+      overflow: hidden;
+      margin: 22px 0 12px
+    }
+
+    .ld-bar {
+      height: 100%;
+      width: 100%;
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      background: linear-gradient(90deg, #1769FF, #48A0FF);
+      border-radius: 99px
+    }
+
+    .ld-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font: 500 13.5px Inter, system-ui, sans-serif;
+      color: #64748B
+    }
+
+    .ld-pct {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: #1769FF
+    }
+
+    @keyframes ldping {
+      from {
+        opacity: .65;
+        transform: scale(.88)
+      }
+
+      to {
+        opacity: 0;
+        transform: scale(1.3)
+      }
+    }
+
+    @keyframes ldfloat {
+      50% {
+        transform: translateY(-6px)
+      }
+    }
+
     /* lazy images fade in once loaded (only active when lazy.js is running) */
-    .lz-on img[loading="lazy"]:not(.is-in){opacity:0}
-    .lz-on img.is-in{animation:lzin .8s ease backwards}
-    @keyframes lzin{from{opacity:0;transform:scale(1.03)}}
-    @media (prefers-reduced-motion:reduce){.ld-logo,.ld-logo i{animation:none}.ld-box,#loader{transition-duration:.01s!important}.lz-on img.is-in{animation:none}}
+    .lz-on img[loading="lazy"]:not(.is-in) {
+      opacity: 0
+    }
+
+    .lz-on img.is-in {
+      animation: lzin .8s ease backwards
+    }
+
+    @keyframes lzin {
+      from {
+        opacity: 0;
+        transform: scale(1.03)
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      .ld-logo,
+      .ld-logo i {
+        animation: none
+      }
+
+      .ld-box,
+      #loader {
+        transition-duration: .01s !important
+      }
+
+      .lz-on img.is-in {
+        animation: none
+      }
+    }
   </style>
-  <noscript><style>#loader{display:none!important}html.is-loading,html.is-loading body{overflow:auto!important}.lz-on img[loading="lazy"]{opacity:1!important}</style></noscript>
+  <noscript>
+    <style>
+      #loader {
+        display: none !important
+      }
+
+      html.is-loading,
+      html.is-loading body {
+        overflow: auto !important
+      }
+
+      .lz-on img[loading="lazy"] {
+        opacity: 1 !important
+      }
+    </style>
+  </noscript>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/checkout.css">
 </head>
@@ -45,16 +204,21 @@
 <body>
   <div id="loader" role="status" aria-live="polite" aria-label="Loading Explicit Online Tutorial">
     <div class="ld-box">
-      <div class="ld-logo"><i></i><i></i><b class="ld-fallback">EOT</b><img src="assets/img/eot-logo.png" alt="" width="62" height="62" data-critical decoding="async" onerror="this.parentNode.classList.add('nologo');this.style.display='none'"></div>
+      <div class="ld-logo"><i></i><i></i><b class="ld-fallback">EOT</b><img src="assets/img/eot-logo.png" alt=""
+          width="62" height="62" data-critical decoding="async"
+          onerror="this.parentNode.classList.add('nologo');this.style.display='none'"></div>
       <div class="ld-name">Explicit Online Tutorial</div>
-      <div class="ld-track" aria-hidden="true"><div class="ld-bar"></div></div>
-      <div class="ld-meta"><span class="ld-msg">Warming up the classroom</span><span class="ld-pct" aria-hidden="true">0%</span></div>
+      <div class="ld-track" aria-hidden="true">
+        <div class="ld-bar"></div>
+      </div>
+      <div class="ld-meta"><span class="ld-msg">Loading</span><span class="ld-pct" aria-hidden="true">0%</span></div>
     </div>
   </div>
   <script src="js/loader.js"></script>
   <header class="top">
-    <div class="w nav"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark" data-critical decoding="async" fetchpriority="high"><span>Explicit Online Tutorial</span></a><button class="burger"
-        aria-label="Open menu" aria-expanded="false" aria-controls="lk">☰</button>
+    <div class="w nav"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark"
+          data-critical decoding="async" fetchpriority="high"><span>Explicit Online Tutorial</span></a><button
+        class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="lk">☰</button>
       <nav class="links" id="lk" aria-label="Main"><a href="#results">Results</a><a href="#story">Our story</a><a
           href="#classes">Classes</a><a href="#family">Family system</a><a href="#programme">2027 class</a><a
           href="#faq">FAQ</a><a class="btn sm" data-join href="#enrol">Join class</a></nav>
@@ -68,7 +232,8 @@
         <div class="stack">
           <div class="floor" aria-hidden="true"></div>
           <div class="giant" data-scrub="scale" aria-hidden="true">300+</div>
-          <figure class="d3 " data-scrub='float' data-depth='40'><img src="assets/3d/hero-scene.webp" alt="" data-critical decoding="async" fetchpriority="high">
+          <figure class="d3 " data-scrub='float' data-depth='40'><img src="assets/3d/hero-scene.webp" alt=""
+              data-critical decoding="async" fetchpriority="high">
             <figcaption>3D file needed:<br>assets/3d/hero-scene.webp<br>Floating books, laptop, exam sheets and question
               cards, transparent background</figcaption>
           </figure>
@@ -105,13 +270,20 @@
       </div>
       <div class="track" data-hscroll>
         <div class="track-inner" data-track style="display:contents"><button data-zoom="assets/img/results-01.jpg"
-            class=""><img src="assets/img/results-01.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-02.jpg" class=""><img
-              src="assets/img/results-02.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-03.jpg" class=""><img
-              src="assets/img/results-03.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-04.jpg" class=""><img
-              src="assets/img/results-04.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-05.jpg" class=""><img
-              src="assets/img/results-05.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-06.jpg" class=""><img
-              src="assets/img/results-06.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-07.jpg" class=""><img
-              src="assets/img/results-07.jpg" alt="Student result or testimonial screenshot shared with EOT" loading="lazy" decoding="async"></button></div>
+            class=""><img src="assets/img/results-01.jpg" alt="Student result or testimonial screenshot shared with EOT"
+              loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-02.jpg" class=""><img
+              src="assets/img/results-02.jpg" alt="Student result or testimonial screenshot shared with EOT"
+              loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-03.jpg" class=""><img
+              src="assets/img/results-03.jpg" alt="Student result or testimonial screenshot shared with EOT"
+              loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-04.jpg" class=""><img
+              src="assets/img/results-04.jpg" alt="Student result or testimonial screenshot shared with EOT"
+              loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-05.jpg" class=""><img
+              src="assets/img/results-05.jpg" alt="Student result or testimonial screenshot shared with EOT"
+              loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-06.jpg" class=""><img
+              src="assets/img/results-06.jpg" alt="Student result or testimonial screenshot shared with EOT"
+              loading="lazy" decoding="async"></button><button data-zoom="assets/img/results-07.jpg" class=""><img
+              src="assets/img/results-07.jpg" alt="Student result or testimonial screenshot shared with EOT"
+              loading="lazy" decoding="async"></button></div>
       </div>
       <div class="w">
         <p class="note">Student screenshots shared with EOT. Tap to enlarge.</p>
@@ -160,12 +332,18 @@
       </div>
       <div class="track" data-hscroll>
         <div data-track style="display:contents"><button data-zoom="assets/img/chat-01.jpg" class=""><img
-              src="assets/img/chat-01.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-02.jpg" class=""><img
-              src="assets/img/chat-02.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-03.jpg" class=""><img
-              src="assets/img/chat-03.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-04.jpg" class=""><img
-              src="assets/img/chat-04.jpg" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-05.png" class="tall"><img
-              src="assets/img/chat-05.png" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button><button data-zoom="assets/img/chat-06.png" class="tall"><img
-              src="assets/img/chat-06.png" alt="Student testimonial screenshot about EOT" loading="lazy" decoding="async"></button></div>
+              src="assets/img/chat-01.jpg" alt="Student testimonial screenshot about EOT" loading="lazy"
+              decoding="async"></button><button data-zoom="assets/img/chat-02.jpg" class=""><img
+              src="assets/img/chat-02.jpg" alt="Student testimonial screenshot about EOT" loading="lazy"
+              decoding="async"></button><button data-zoom="assets/img/chat-03.jpg" class=""><img
+              src="assets/img/chat-03.jpg" alt="Student testimonial screenshot about EOT" loading="lazy"
+              decoding="async"></button><button data-zoom="assets/img/chat-04.jpg" class=""><img
+              src="assets/img/chat-04.jpg" alt="Student testimonial screenshot about EOT" loading="lazy"
+              decoding="async"></button><button data-zoom="assets/img/chat-05.png" class="tall"><img
+              src="assets/img/chat-05.png" alt="Student testimonial screenshot about EOT" loading="lazy"
+              decoding="async"></button><button data-zoom="assets/img/chat-06.png" class="tall"><img
+              src="assets/img/chat-06.png" alt="Student testimonial screenshot about EOT" loading="lazy"
+              decoding="async"></button></div>
       </div>
     </section>
 
@@ -338,10 +516,13 @@
 
         <form class="co" id="enrolForm" novalidate autocomplete="on">
           <div class="pr" role="radiogroup" aria-label="Choose your plan">
-            <label class="plan" data-plan="monthly"><input type="radio" name="plan" value="monthly"><span class="tick" aria-hidden="true"></span><small>Pay monthly</small><b>₦10k</b>
+            <label class="plan" data-plan="monthly"><input type="radio" name="plan" value="monthly"><span class="tick"
+                aria-hidden="true"></span><small>Pay monthly</small><b>₦10k</b>
               <p>per month</p>
             </label>
-            <label class="plan hi is-sel" data-plan="phase1"><input type="radio" name="plan" value="phase1" checked><span class="tick" aria-hidden="true"></span><small>Pay ahead for the entire Phase 1 tutorial</small><b>₦18k</b>
+            <label class="plan hi is-sel" data-plan="phase1"><input type="radio" name="plan" value="phase1"
+                checked><span class="tick" aria-hidden="true"></span><small>Pay ahead for the entire Phase 1
+                tutorial</small><b>₦18k</b>
               <p>for 2 months</p><span class="save">Save ₦2,000</span>
             </label>
           </div>
@@ -350,21 +531,40 @@
             <h3>Secure your slot</h3>
             <p class="sub">Fill in the student's details, then pay securely with Paystack.</p>
             <div class="cg">
-              <div class="fld full"><label class="t" for="f-name">Student's full name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Adaeze Okafor" required><span class="msg" role="alert"></span></div>
-              <div class="fld"><label class="t" for="f-email">Email address</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><span class="msg" role="alert"></span></div>
-              <div class="fld"><label class="t" for="f-phone">WhatsApp number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="0803 123 4567" required><span class="msg" role="alert"></span></div>
-              <div class="fld"><label class="t" for="f-state">State of residence</label><input id="f-state" name="state" type="text" autocomplete="address-level1" placeholder="e.g. Rivers" required><span class="msg" role="alert"></span></div>
-              <div class="fld"><label class="t" for="f-ref">Referred by <em>(optional)</em></label><input id="f-ref" name="referral" type="text" placeholder="Name of the student who referred you"></div>
-              <div class="fld full"><label class="agree"><input type="checkbox" name="agree"><span>I understand that EOT classes are 100% online</span></label></div>
+              <div class="fld full"><label class="t" for="f-name">Student's full name</label><input id="f-name"
+                  name="name" type="text" autocomplete="name" placeholder="e.g. Adaeze Okafor" required><span
+                  class="msg" role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-email">Email address</label><input id="f-email" name="email"
+                  type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><span
+                  class="msg" role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-phone">WhatsApp number</label><input id="f-phone" name="phone"
+                  type="tel" autocomplete="tel" inputmode="tel" placeholder="0803 123 4567" required><span class="msg"
+                  role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-state">State of residence</label><input id="f-state" name="state"
+                  type="text" autocomplete="address-level1" placeholder="e.g. Rivers" required><span class="msg"
+                  role="alert"></span></div>
+              <div class="fld"><label class="t" for="f-ref">Referred by <em>(optional)</em></label><input id="f-ref"
+                  name="referral" type="text" placeholder="Name of the student who referred you"></div>
+              <div class="fld full"><label class="agree"><input type="checkbox" name="agree"><span>I understand that EOT
+                    classes are 100% online</span></label></div>
             </div>
 
-            <div class="sum"><span>You're paying for<strong id="coPlan">Full Phase 1 (2 months)</strong></span><b id="coTotal">₦18,000</b></div>
+            <div class="sum"><span>You're paying for<strong id="coPlan">Full Phase 1 (2 months)</strong></span><b
+                id="coTotal">₦18,000</b></div>
             <p class="co-err" id="coError" role="alert" hidden></p>
-            <button class="btn pay" id="payBtn" type="submit"><span class="spin" aria-hidden="true"></span><span class="lbl">Pay ₦18,000 securely</span></button>
+            <button class="btn pay" id="payBtn" type="submit"><span class="spin" aria-hidden="true"></span><span
+                class="lbl">Pay ₦18,000 securely</span></button>
 
             <div class="secure">
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="3"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>Secured by Paystack</span>
-              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>We never see your card details</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="4" y="10" width="16" height="10" rx="3" />
+                  <path d="M8 10V7a4 4 0 018 0v3" />
+                </svg>Secured by Paystack</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
+                </svg>We never see your card details</span>
             </div>
             <div class="cards" aria-label="Payment methods"><i>Card</i><i>Bank transfer</i><i>USSD</i></div>
           </div>
@@ -438,7 +638,8 @@
     </section>
   </main>
   <footer>
-    <div class="w fw"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark" loading="lazy" decoding="async"><span>Explicit Online Tutorial</span></a><span>2027 Phase 1 UTME class ·
+    <div class="w fw"><a class="logo" href="#hero"><img src="assets/img/eot-logo.png" alt="EOT logo" class="logo-mark"
+          loading="lazy" decoding="async"><span>Explicit Online Tutorial</span></a><span>2027 Phase 1 UTME class ·
         20 October to 20 December</span></div>
   </footer>
   <dialog id="dl"><button id="dx" aria-label="Close">✕</button><img id="di" alt="Enlarged screenshot"></dialog>

@@ -9,7 +9,7 @@
   var bar = loader.querySelector(".ld-bar"), pct = loader.querySelector(".ld-pct"), msg = loader.querySelector(".ld-msg");
   var st = { dom: false, fonts: false, imgs: false, win: false };
   var shown = 0, done = false, lastMsg = -1;
-  var lines = ["Warming up the classroom", "Loading lessons and materials", "Almost ready", "Welcome"];
+  var lines = ["Loading", "Loading", "Almost there", "Ready"];
 
   /* ---- real loading signals ---- */
   function onDom() {
