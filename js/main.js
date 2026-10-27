@@ -214,73 +214,7 @@
         });
     });
 
-    /* ---------- horizontal galleries: pinned coverflow on desktop, swipe focus on mobile ---------- */
-    function cover(buttons) {
-        var mid = window.innerWidth / 2;
-        buttons.forEach(function (b) {
-            var r = b.getBoundingClientRect();
-            var norm = gsap.utils.clamp(-1, 1, ((r.left + r.width / 2) - mid) / (window.innerWidth * 0.48));
-            var ad = Math.abs(norm);
-            gsap.set(b, {
-                rotateY: -norm * 16,
-                scale: 1 - ad * 0.07,
-                zIndex: Math.round((1 - ad) * 8),
-                transformPerspective: 900,
-                transformOrigin: "50% 50%"
-            });
-        });
-    }
-    mm.add("(min-width:900px)", function () {
-        var undo = [];
-        $$(".hs").forEach(function (sec) {
-            var track = $("[data-hscroll]", sec), inner = $("[data-track]", sec);
-            if (!track || !inner) return;
-            var buttons = $$("button", inner);
-            track.style.overflow = "hidden";
-            inner.style.display = "flex";
-            inner.style.gap = "20px";
-            inner.style.width = "max-content";
-            var dist = function () {
-                var pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
-                return Math.max(0, inner.offsetWidth - (track.clientWidth - pad * 2));
-            };
-            gsap.to(inner, {
-                x: function () { return -dist(); }, ease: "none",
-                scrollTrigger: {
-                    trigger: sec, start: "top 60px", end: function () { return "+=" + Math.max(dist(), 1); },
-                    pin: true, scrub: 0.85, anticipatePin: 1, invalidateOnRefresh: true,
-                    onUpdate: function () { cover(buttons); }
-                }
-            });
-            undo.push(function () {
-                track.style.overflow = "";
-                inner.style.cssText = "display:contents";
-                gsap.set(buttons, { clearProps: "transform,zIndex" });
-            });
-        });
-        return function () { undo.forEach(function (f) { f(); }); };
-    });
-    mm.add("(max-width:899px)", function () {
-        var offs = [];
-        $$(".track").forEach(function (track) {
-            var buttons = $$("button", track);
-            var focus = function () {
-                var mid = window.innerWidth / 2;
-                buttons.forEach(function (b) {
-                    var r = b.getBoundingClientRect();
-                    var ad = Math.min(1, Math.abs((r.left + r.width / 2) - mid) / (window.innerWidth * 0.75));
-                    b.style.scale = String(1 - ad * 0.05);
-                });
-            };
-            track.addEventListener("scroll", focus, { passive: true });
-            focus();
-            offs.push(function () {
-                track.removeEventListener("scroll", focus);
-                buttons.forEach(function (b) { b.style.scale = ""; });
-            });
-        });
-        return function () { offs.forEach(function (f) { f(); }); };
-    });
+    /* galleries are now a vertical stack: see dramatic.js / dramatic.css */
 
     /* ---------- founder story ---------- */
     function mark(steps, idx, dim) {
